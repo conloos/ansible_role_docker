@@ -13,3 +13,8 @@ First look at tasks/0_check.yml
 | docker_url | docker gpg url |
 | docker_keyring | path to keyring |
 | docker_repo | package repo infromation |
+
+# lxd-container creation
+You have to create the conainer with "security.nesting: true"
+
+
