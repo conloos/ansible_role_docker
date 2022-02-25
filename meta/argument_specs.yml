@@ -3,18 +3,15 @@ argument_specs:
     short_description: Main entrypoint
     options:
       docker_url:
-        type: url
+        type: str
         default: https://download.docker.com/linux/ubuntu/gpg
-        required: no
         description: docker gpg url
       docker_keyring:
         type: str
         default: /usr/share/keyrings/docker-archive-keyring.gpg
-        required: no
         description: path to keyring
       docker_repo:
         type: str
         default: deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu impish stable
-        required: no
         description: package repo information
 
