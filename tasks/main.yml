@@ -1,6 +1,4 @@
 ---
-- include: check.yml
-
 - name: purge old packages
   ansible.builtin.apt:
     name: '{{ item }}'
