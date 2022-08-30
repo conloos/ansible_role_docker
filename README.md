@@ -14,6 +14,6 @@ All configurations are held atomically via their own files.
 | docker_repo | package repo infromation |
 
 # lxd-container creation
-You have to create the conainer with "security.nesting: true"
+You have to create the conainer with "security.nesting: True"
 
 
