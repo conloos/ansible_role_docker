@@ -1,0 +1,13 @@
+---
+- name: Add an Apt signing key for Docker
+  ansible.builtin.apt_key:
+    url: '{{ docker_url }}'
+    keyring: '{{ docker_keyring }}'
+    state: present
+
+- name: Add specified repository into sources list
+  ansible.builtin.apt_repository:
+    repo: '{{ docker_repo }}'
+    filename: docker
+    state: present
+...

@@ -1,0 +1,11 @@
+---
+- name: Verify that required parameters are set
+  ansible.builtin.assert:
+    that:
+      - '{{ item.key }} is defined'
+      - '{{ item.key }} | length > 0'
+  with_items:
+    - { 'key': docker_url }
+    - { 'key': docker_keyring }
+    - { 'key': docker_repo }
+...

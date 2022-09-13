@@ -1,46 +1,7 @@
 ---
-- name: purge old packages
-  ansible.builtin.apt:
-    name: '{{ item }}'
-    state: absent
-    update_cache: True
-  register: apt_status
-  until: apt_status is success
-  delay: 6
-  retries: 10
-  with_items:
-    - docker
-    - docker.io
-    - containerd 
-    - runc
-  when: ansible_os_family == 'Debian'
-
-- name: Add an Apt signing key for Docker
-  ansible.builtin.apt_key:
-    url: '{{ docker_url }}'
-    keyring: '{{ docker_keyring }}'
-    state: present
-- name: Add specified repository into sources list
-  ansible.builtin.apt_repository:
-    repo: '{{ docker_repo }}'
-    filename: docker
-    state: present
-
-- name: install docker engine
-  ansible.builtin.apt:
-    name: '{{ item }}'
-    state: present
-    update_cache: True
-  register: apt_status
-  until: apt_status is success
-  delay: 6
-  retries: 10
-  with_items:
-    - ca-certificates
-    - lsb-release
-    - docker-ce
-    - docker-ce-cli
-    - containerd.io
-    - python3-docker
-  when: ansible_os_family == 'Debian'
+- name: Add and run all plays
+  include_tasks: "{{ element }}"
+  with_items: "{{ lookup( 'ansible.builtin.fileglob', '*.yml' ).split(',') | reject('search','main.yml') | sort }}"
+  loop_control:
+    loop_var: element
 ...

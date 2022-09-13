@@ -1,0 +1,19 @@
+---
+- name: Install docker engine
+  ansible.builtin.apt:
+    name: '{{ item }}'
+    state: present
+    update_cache: true
+  register: apt_status
+  until: apt_status is success
+  delay: 6
+  retries: 10
+  with_items:
+    - ca-certificates
+    - lsb-release
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
+    - python3-docker
+  when: ansible_os_family == 'Debian'
+...
